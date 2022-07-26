@@ -1,0 +1,23 @@
+<html>
+    {% include 'head.html' %}
+
+    <body>
+        <div class="container mt-4">
+            <div class="row">
+                {%- for card in cards %}
+                <div class="col-auto mb-3">
+                    <div class="card" style="width: 25rem;">
+                        <div class="card-body text-center">
+                            <img class="card-img-top" style="width: 10rem;" src="{{card.image}}" alt="Card image cap">
+                            <h5 class="card-title">{{card.name}}</h5>
+
+                            <p class="card-text">{{card.description}}</p>
+                            <a href="{{card.url}}" class="card-link">Try it!</a>
+                        </div>
+                    </div>
+                </div>
+                {%- endfor %}
+            </div>
+        </div>
+    </body>
+</html>

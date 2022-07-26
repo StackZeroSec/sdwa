@@ -1,0 +1,4 @@
+Flask
+Flask-Session
+Flask-SQLAlchemy
+jinja2

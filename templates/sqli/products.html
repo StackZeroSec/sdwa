@@ -1,0 +1,41 @@
+<html>
+{% include 'head.html' %}
+<body>
+    <a href="logout">Clear Session</a>
+    <form method="post" action="#">
+    <div class="input-group">
+        <div class="form-outline">
+          <input type="search" name = "product_name" id="form1" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Search
+        </button>
+      </div>
+    </form>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            {%- for column in columns %}
+            <th scope="col">{{column}}</th>
+            {%- endfor %}
+          </tr>
+        </thead>
+        <tbody>
+        {%- for row in rows %}
+        {%- set name = row[1] | string %}
+        {%- set price = row[2] | string %}
+        {%- set quantity = row[3] | string %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{name[:10]}}</td>
+            <td>{{price[:10]}}</td>
+            <td>{{quantity[:10]}}</td>
+          </tr>
+        {%- endfor %}
+        </tbody>
+      </table>
+
+</body>
+
+</html>
