@@ -1,0 +1,33 @@
+<html>
+{% include 'head.html' %}
+    <body>
+        <form action="#" method="GET">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary" type="submit">Check</button>
+            </div>
+            <input type="text" name="current_site" placeholder="select the site index" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+          </div>
+        </form>
+          <table class="table">
+            <tbody>
+            {%- for site in sites %}
+              <tr>
+
+                <th scope="row">{{loop.index}}</th>
+                <td>{{site}}</td>
+              </tr>
+              {%- endfor %}
+            </tbody>
+          </table>
+          {%- if current_site is not none %}
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{current_site["name"]}}</h5>
+              <p class="card-text">{{current_site["description"]}}</p>
+
+            </div>
+          </div>
+          {%- endif %}
+    </body>
+</html>

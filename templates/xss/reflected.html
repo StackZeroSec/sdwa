@@ -1,0 +1,12 @@
+<html>
+{% include 'head.html' %}
+    <body>
+        <div class="input-group mb-3">
+        <form action="#" method="GET">
+            <input type="text" name="name" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        </div>
+        <h1>Hello {{name|safe}}! </h1>
+    </body>
+</html>

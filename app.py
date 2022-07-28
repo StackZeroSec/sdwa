@@ -2,6 +2,7 @@ from crypt import methods
 from flask import Flask, render_template, request, session, redirect, abort
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
+from pathlib import Path
 import hashlib
 import os
 
@@ -27,6 +28,52 @@ def home():
             )
 
     return render_template("home.html", cards = cards)
+
+@app.route("/xss/list")
+def xss_list():
+    return render_template("xss/xss_list.html")
+
+@app.route("/xss/reflected")
+def xss_reflected():
+    name = request.args.get('name')
+    if name == None:
+        name = "Anonymous"
+    return render_template("/xss/reflected.html", name=name)
+
+@app.route("/xss/stored", methods=["GET", "POST"])
+def xss_stored():
+
+    db_file = "comments.txt"
+
+    file = Path(db_file)
+    file.touch(exist_ok=True)
+
+    if request.method == 'POST':
+        comment = request.form["comment"]
+
+        with open(db_file, "a") as f:
+            f.write(comment+"\n")
+
+    comments = ""
+    with open(db_file, "r+") as f:
+        comments = f.readlines()
+
+    return render_template("/xss/stored.html", comments=comments)
+
+@app.route("/xss/stored/clear")
+def xss_stored_clear():
+    db_file = "comments.txt"
+
+    file = Path(db_file)
+    if file.exists():
+        file.unlink()
+    return redirect("/xss/stored")
+
+@app.route("/xss/dom")
+def xss_dom_based():
+    return render_template("xss/dom.html")
+
+
 @app.route("/sqli/login", methods= ["GET","POST"])
 def sqli_login():
     if "username" in request.form and "password" in request.form:
@@ -51,6 +98,7 @@ def sqli_login():
 def logout():
     session.clear()
     return redirect("/sqli/login")
+
 @app.route("/sqli/products", methods = ["GET", "POST"])
 def sqli_products():
     print(session)
@@ -65,6 +113,19 @@ def sqli_products():
 
     print(rs)
     return render_template("sqli/products.html", rows=rs, columns=columns)
+
+@app.route("/cmdi")
+def cmdi():
+    sites = os.listdir("static/sites")
+    current_site = None
+    if request.args.get("current_site") != None:
+        site = request.args.get("current_site")
+        description = os.popen(f"cat static/sites/{site}").read()
+        current_site = {
+            "name": site.capitalize(),
+            "description": description
+        }
+    return render_template("cmdi/cmdi.html", sites=sites, current_site=current_site)
 
 if __name__ == "__main__":
     app.run()

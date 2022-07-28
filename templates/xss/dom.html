@@ -1,0 +1,20 @@
+<html>
+{% include 'head.html' %}
+        <body>
+            <h1>Hello
+                <script>
+                var name_start = document.location.href.indexOf("name=");
+                var name_end = document.location.href.substring(name_start).indexOf("&");
+                if(name_start == -1)
+                    var name= "Anonymous";
+                else if(name_end != -1)
+                    var name = document.location.href.substring(name_start+5, name_start+name_end);
+                else
+                    var name = document.location.href.substring(name_start+5);
+                document.write(decodeURIComponent(name));
+                </script>
+
+            </h1>
+
+        </body>
+</html>

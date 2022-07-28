@@ -1,0 +1,15 @@
+<html>
+{% include 'head.html' %}
+    <body>
+        <a href="/xss/stored/clear">Clear comments</a>
+        <form action="#" method="POST">
+            <input type="text" id="comment" name="comment"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <ul class="list-group">
+            {%- for comment in comments %}
+            <li class="list-group-item">{{comment|safe}}</li>
+            {%- endfor %}
+          </ul>
+    </body>
+    </html>
