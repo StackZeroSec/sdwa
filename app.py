@@ -90,7 +90,7 @@ def sqli_login():
                 session["admin"] = False
             return redirect("/sqli/products")
         else:
-            return "Bye bye"
+            return "Login failed"
     else:
         return render_template("sqli/login.html")
 
@@ -101,18 +101,19 @@ def logout():
 
 @app.route("/sqli/products", methods = ["GET", "POST"])
 def sqli_products():
-    print(session)
+
     if "admin" not in session:
         abort(401)
-    print(request.form.get("product_name"))
+
+    message = "You are logged in as admin, congratulation!" if session["admin"] else "You are logged in as normal user"
     if "product_name" in request.form:
         rs = db.engine.execute("SELECT * from products WHERE name LIKE'"+request.form.get("product_name")+"%'").all()
     else:
         rs = db.engine.execute("SELECT * from products").all()
     columns = list(rs[0].keys())[1:]
 
-    print(rs)
-    return render_template("sqli/products.html", rows=rs, columns=columns)
+
+    return render_template("sqli/products.html", rows=rs, columns=columns, message=message)
 
 @app.route("/cmdi")
 def cmdi():

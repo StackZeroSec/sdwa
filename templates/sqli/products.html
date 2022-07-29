@@ -2,6 +2,9 @@
 {% include 'head.html' %}
 <body>
     <a href="logout">Clear Session</a>
+    <div class="alert alert-primary" role="alert">
+      {{message}}
+    </div>
     <form method="post" action="#">
     <div class="input-group">
         <div class="form-outline">
