@@ -7,6 +7,8 @@ SDWA is the simplest vulnerable application, easy to install and easy to exploit
 Here you can be creative and test whatever you learn in your cybersecurity path, the application is strictly related
 with the tutorials you can find to [StackZero](https://www.stackzero.net)
 
+![SDWA Homepage](/images/sdwa.jpg)
+
 ## Getting Started
 
 ### Dependencies
