@@ -38,6 +38,12 @@ pip install -r requirements.txt
 rm db/vuln_db.sqlite
 python db/setup_db.py
 ```
+### Writeups
+As I said in the description, all the Write-ups are in [StackZero](https://www.stackzero.net) in particular you can find:
+
+* [XSS](https://www.stackzero.net/the-terrifying-world-of-cross-site-scripting-xss-part-2/)
+* [Sqli](https://www.stackzero.net/learn-sql-injection-in-practice-by-hacking-vulnerable-application/)
+* [Cmdi](https://www.stackzero.net/command-injection/)
 
 ### Executing program
 Running the application is extremely easy, from the sdwa directory type:
